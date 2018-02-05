@@ -93,7 +93,7 @@ translations:send:
   variables:
     URL: ${PREVIEW_DOMAIN}
   script:
-    - echo "translation send"
+    - translation_send
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
     - schedules
@@ -105,7 +105,7 @@ translations:receive:
   variables:
     URL: ${PREVIEW_DOMAIN}
   script:
-    - echo "translation receive"
+    - translation_receive
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
     - schedules

@@ -13,3 +13,4 @@ PyYAML==3.12
 tqdm==4.14.0
 Pygments==2.2.0
 datadog==0.16.0
+transifex-client==0.13.0
