@@ -86,6 +86,30 @@ test_preview_links:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+translations:send:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - echo "translation send"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+    - schedules
+
+translations:receive:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  script:
+    - echo "translation receive"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+    - schedules
+
 # ================== live ================== #
 build_live:
   <<: *base_template
