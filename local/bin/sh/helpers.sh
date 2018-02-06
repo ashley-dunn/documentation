@@ -470,11 +470,29 @@ index_algolia() {
 }
 
 
+translation_rc() {
+    echo "Setting api key.."
+    translate_api_hostname="https://api.transifex.com"
+    translate_hostname="https://www.transifex.com"
+    #translate_password=$(get_secret 'transifex_api_key')
+    translate_password="1/9243973bed906ff503410658fa819296470fcff3"
+    translate_username="api"
+    cat >~/.transifexrc <<EOL
+[${translate_hostname}]
+api_hostname = ${translate_api_hostname}
+hostname = ${translate_hostname}
+password = ${translate_password}
+username = ${translate_username}
+EOL
+}
+
+
 translation_send() {
     echo "---------"
     echo "Sending Translations"
     echo "---------"
     tx --version
+    translation_rc
 }
 
 
@@ -483,4 +501,5 @@ translation_receive() {
     echo "Receiving Translations"
     echo "---------"
     tx --version
+    translation_rc
 }
