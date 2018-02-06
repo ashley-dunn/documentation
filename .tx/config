@@ -26,13 +26,7 @@ source_lang = en_US
 type = GITHUBMARKDOWN
 
 [documentation-poc.data_libraries]
-file_filter = data/libraries.<lang>.yaml
-source_file = data/libraries.yaml
-source_lang = en_US
-type = YML
-
-[documentation-poc.data_integrations_activemq_xml]
-file_filter = data/integrations/activemq_xml.<lang>.yaml
-source_file = data/integrations/activemq_xml.yaml
+file_filter = data/test_file.<lang>.yaml
+source_file = data/test_file.yaml
 source_lang = en_US
 type = YML
