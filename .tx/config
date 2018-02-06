@@ -1,2 +1,38 @@
 [main]
 host = https://www.transifex.com
+
+[documentation-poc.content__index]
+file_filter = content/_index.<lang>.md
+source_file = content/_index.md
+source_lang = en_US
+type = MD
+
+[documentation-poc.content_error]
+file_filter = content/error.<lang>.md
+source_file = content/error.md
+source_lang = en_US
+type = MD
+
+[documentation-poc.content_glossary]
+file_filter = content/glossary.<lang>.md
+source_file = content/glossary.md
+source_lang = en_US
+type = MD
+
+[documentation-poc.content_help]
+file_filter = content/help.<lang>.md
+source_file = content/help.md
+source_lang = en_US
+type = MD
+
+[documentation-poc.data_libraries]
+file_filter = data/libraries.<lang>.yaml
+source_file = data/libraries.yaml
+source_lang = en_US
+type = YML
+
+[documentation-poc.data_integrations_activemq_xml]
+file_filter = data/integrations/activemq_xml.<lang>.yaml
+source_file = data/integrations/activemq_xml.yaml
+source_lang = en_US
+type = YML

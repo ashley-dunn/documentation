@@ -493,6 +493,7 @@ translation_send() {
     echo "---------"
     tx --version
     translation_rc
+    tx push -s
 }
 
 
@@ -502,4 +503,5 @@ translation_receive() {
     echo "---------"
     tx --version
     translation_rc
+    tx pull -a
 }
