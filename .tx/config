@@ -5,25 +5,25 @@ host = https://www.transifex.com
 file_filter = content/_index.<lang>.md
 source_file = content/_index.md
 source_lang = en_US
-type = MD
+type = GITHUBMARKDOWN
 
 [documentation-poc.content_error]
 file_filter = content/error.<lang>.md
 source_file = content/error.md
 source_lang = en_US
-type = MD
+type = GITHUBMARKDOWN
 
 [documentation-poc.content_glossary]
 file_filter = content/glossary.<lang>.md
 source_file = content/glossary.md
 source_lang = en_US
-type = MD
+type = GITHUBMARKDOWN
 
 [documentation-poc.content_help]
 file_filter = content/help.<lang>.md
 source_file = content/help.md
 source_lang = en_US
-type = MD
+type = GITHUBMARKDOWN
 
 [documentation-poc.data_libraries]
 file_filter = data/libraries.<lang>.yaml
