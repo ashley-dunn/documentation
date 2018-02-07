@@ -1,12 +1,6 @@
 [main]
 host = https://www.transifex.com
 
-[i18n.enjson]
-file_filter = i18n/<lang>.json
-source_file = i18n/en-US.json
-source_lang = en_US
-type = KEYVALUEJSON
-
 [documentation-poc.content__index]
 file_filter = content/_index.<lang>.md
 source_file = content/_index.md
@@ -36,3 +30,9 @@ file_filter = data/test_file.<lang>.yaml
 source_file = data/test_file.yaml
 source_lang = en_US
 type = YML
+
+[documentation-poc.enjson]
+file_filter = i18n/<lang>.json
+source_file = i18n/en-US.json
+source_lang = en_US
+type = KEYVALUEJSON
