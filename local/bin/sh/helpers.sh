@@ -475,7 +475,7 @@ translation_rc() {
     translate_api_hostname="https://api.transifex.com"
     translate_hostname="https://www.transifex.com"
     #translate_password=$(get_secret 'transifex_api_key')
-    translate_password="1/9243973bed906ff503410658fa819296470fcff3"
+    translate_password="1/f35f3e69f5946c7c447fdbdc1f52af905790bf2a"
     translate_username="api"
     cat >~/.transifexrc <<EOL
 [${translate_hostname}]
@@ -491,6 +491,10 @@ translation_send() {
     echo "---------"
     echo "Sending Translations"
     echo "---------"
+
+    find ./content -type f
+    find ./data -type f
+
     tx --version
     translation_rc
     tx push -s

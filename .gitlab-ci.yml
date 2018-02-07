@@ -47,6 +47,11 @@ build_preview:
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     - remove_static_from_repo
     - create_artifact
+  artifacts:
+    untracked: true
+    paths:
+    - content/
+    - data/
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -94,10 +99,9 @@ translations:send:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - version_static_assets
-    - sync_integration_descriptions
-    - build_hugo_site
     - translation_send
+  dependencies:
+    - build_preview
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
     - schedules
