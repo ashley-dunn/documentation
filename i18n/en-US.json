@@ -1,0 +1,18 @@
+{
+  "menu_references": {
+    "one":  "Reference",
+    "other":  "References"
+  },
+
+  "menu_references_api": {
+    "other":  "API"
+  },
+
+  "menu_references_getting_started": {
+    "other": "Getting Started"
+  },
+
+  "menu_references_agent": {
+    "other":  "Datadog Agent"
+  }
+}
