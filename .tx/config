@@ -1,6 +1,12 @@
 [main]
 host = https://www.transifex.com
 
+[i18n.enyaml]
+file_filter = i18n/<lang>.yaml
+source_file = i18n/en-US.yaml
+source_lang = en_US
+type = YML
+
 [documentation-poc.content__index]
 file_filter = content/_index.<lang>.md
 source_file = content/_index.md
