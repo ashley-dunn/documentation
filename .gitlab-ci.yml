@@ -92,7 +92,10 @@ translations:send:
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
   script:
+    - sync_integration_descriptions
+    - build_hugo_site
     - translation_send
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
