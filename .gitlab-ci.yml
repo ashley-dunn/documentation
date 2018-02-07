@@ -94,6 +94,7 @@ translations:send:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
+    - version_static_assets
     - sync_integration_descriptions
     - build_hugo_site
     - translation_send
