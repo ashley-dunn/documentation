@@ -48,6 +48,7 @@ build_preview:
     - remove_static_from_repo
     - create_artifact
   artifacts:
+    expire_in: 2 hrs
     untracked: true
     paths:
     - content/
