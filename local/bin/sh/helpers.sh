@@ -519,6 +519,8 @@ translation_send() {
     tx --version
     translation_rc
 
+    chmod +x /usr/local/bin/build_tx_config.py
+
     if use_branch; then
         echo "build config, push branch"
         build_tx_config.py --project_slug "documentation-poc"
@@ -539,6 +541,8 @@ translation_receive() {
     echo "---------"
     tx --version
     translation_rc
+
+    chmod +x /usr/local/bin/build_tx_config.py
 
     if use_branch; then
         echo "pulling branch"
