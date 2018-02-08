@@ -487,17 +487,49 @@ EOL
 }
 
 
+use_branch() {
+    ver=$(tx --version)
+    requiredver="0.13.0"
+    currentver=${ver%%,*}
+    # o = true, 1 = false
+    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+        return 1
+    else
+        if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
+}
+
+
 translation_send() {
     echo "---------"
     echo "Sending Translations"
     echo "---------"
 
-    find ./content -type f
-    find ./data -type f
+    #find ./content -type f
+    #find ./data -type f
+
+    current_sha=$(git rev-parse HEAD)
+    echo $current_sha
+    git diff-tree --no-commit-id --name-only -r $current_sha
 
     tx --version
     translation_rc
-    tx push -s
+
+    if use_branch; then
+        echo "build config, push branch"
+        build_tx_config.py --project_slug "documentation-poc"
+        tx push -s -b
+    else
+        echo "build config, push branch ${CI_COMMIT_REF_NAME}"
+        # manually prepend resource string '{branch}--{resource}'
+        build_tx_config.py --project_slug "documentation-poc" --branch_name "${CI_COMMIT_REF_NAME}"
+        # push files
+        tx push -s
+    fi
 }
 
 
@@ -507,5 +539,17 @@ translation_receive() {
     echo "---------"
     tx --version
     translation_rc
-    tx pull -a
+
+    if use_branch; then
+        echo "pulling branch"
+        tx pull -a -b
+    else
+        # manually filter resource string '{branch}--{resource}'
+        echo "pulling branch ${CI_COMMIT_REF_NAME}*"
+        tx pull -r "${CI_COMMIT_REF_NAME}*"
+    fi
+
+    # create branch named the same
+    # commit pulled files
+    # push to repo
 }
