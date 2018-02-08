@@ -513,8 +513,16 @@ translation_send() {
     #find ./data -type f
 
     current_sha=$(git rev-parse HEAD)
+    last_tag=$(git describe --tags --abbrev=0 --match="${CI_COMMIT_REF_NAME}*") || last_tag=0
+    last_tag_commit=$(git rev-list -n 1 ${last_tag})
     echo $current_sha
-    git diff-tree --no-commit-id --name-only -r $current_sha
+    echo $last_tag
+    echo $last_tag_commit
+
+    echo "files modified or added compared to master last tag"
+    #git diff-tree --no-commit-id --name-only -r $current_sha
+    $(git diff $last_tag_commit --name-only --diff-filter=AM)
+    #modified_files=($(git diff $last_tag_commit --name-only --diff-filter=AM))
 
     tx --version
     translation_rc
