@@ -495,7 +495,7 @@ use_branch() {
     if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
         return 1
     else
-        if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; then
+        if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort | head -n1)" = "$requiredver" ]; then
             return 0
         else
             return 1
