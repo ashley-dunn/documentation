@@ -504,6 +504,14 @@ use_branch() {
 }
 
 
+is_merge_commit () {
+    local sha="$1"
+    msha=$(git rev-list -1 --merges ${sha}~1..${sha})
+    [ -z "$msha" ] && return 1
+    return 0
+}
+
+
 translation_send() {
     echo "---------"
     echo "Sending Translations"
@@ -512,17 +520,13 @@ translation_send() {
     #find ./content -type f
     #find ./data -type f
 
-    current_sha=$(git rev-parse HEAD)
-    last_tag=$(git describe --tags --abbrev=0 --match="${CI_COMMIT_REF_NAME}*") || last_tag=0
-    last_tag_commit=$(git rev-list -n 1 ${last_tag})
-    echo $current_sha
-    echo $last_tag
-    echo $last_tag_commit
-
-    echo "files modified or added compared to master last tag"
-    #git diff-tree --no-commit-id --name-only -r $current_sha
-    $(git diff $last_tag_commit --name-only --diff-filter=AM)
-    #modified_files=($(git diff $last_tag_commit --name-only --diff-filter=AM))
+#    current_sha=$(git rev-parse HEAD)
+#    if is_merge_commit $current_sha; then
+#        echo "This was a merge commit files changed.."
+#        git diff-tree --no-commit-id --name-only -r $current_sha
+#    else
+#        fail_step "${FUNCNAME}"
+#    fi
 
     tx --version
     translation_rc
