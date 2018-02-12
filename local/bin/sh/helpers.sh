@@ -489,10 +489,11 @@ EOL
 
 use_branch() {
     ver=$(tx --version)
-    requiredver="0.13.0"
+    requiredver="0.13.1"
     currentver=${ver%%,*}
     # o = true, 1 = false
-    if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+    #if [[ "${CI_COMMIT_REF_NAME}" == "master" ]]; then
+    if [[ "${CI_COMMIT_REF_NAME}" == "david.jones/translations" ]]; then
         return 1
     else
         if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort | head -n1)" = "$requiredver" ]; then
@@ -520,13 +521,14 @@ translation_send() {
     #find ./content -type f
     #find ./data -type f
 
-#    current_sha=$(git rev-parse HEAD)
-#    if is_merge_commit $current_sha; then
-#        echo "This was a merge commit files changed.."
-#        git diff-tree --no-commit-id --name-only -r $current_sha
-#    else
-#        fail_step "${FUNCNAME}"
-#    fi
+    current_sha=$(git rev-parse HEAD)
+
+    if is_merge_commit $current_sha; then
+        echo "This was a merge commit files changed.."
+    else
+        echo "Not a merge commit..."
+        #fail_step "${FUNCNAME}"
+    fi
 
     tx --version
     translation_rc
@@ -534,14 +536,18 @@ translation_send() {
     chmod +x /usr/local/bin/build_tx_config.py
 
     if use_branch; then
-        echo "build config, push branch"
-        build_tx_config.py --project_slug "documentation-poc"
+        echo "build config.."
+        git diff-tree --no-commit-id --name-only -r $current_sha > dfiles.txt
+        files="$(cat dfiles.txt)"
+        build_tx_config.py --project_slug "documentation-poc" --files "${files}"
+        cat ./.tx/config
+        echo "push branch"
         tx push -s -b
     else
-        echo "build config, push branch ${CI_COMMIT_REF_NAME}"
-        # manually prepend resource string '{branch}--{resource}'
-        build_tx_config.py --project_slug "documentation-poc" --branch_name "${CI_COMMIT_REF_NAME}"
-        # push files
+        echo "build config.."
+        build_tx_config.py --project_slug "documentation-poc"
+        cat ./.tx/config
+        echo "push master (${CI_COMMIT_REF_NAME})"
         tx push -s
     fi
 }
@@ -560,7 +566,7 @@ translation_receive() {
         echo "pulling branch"
         tx pull -a -b
     else
-        # manually filter resource string '{branch}--{resource}'
+        # pulling master
         echo "pulling branch ${CI_COMMIT_REF_NAME}*"
         tx pull -r "${CI_COMMIT_REF_NAME}*"
     fi
