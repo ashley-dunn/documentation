@@ -560,20 +560,30 @@ translation_receive() {
     tx --version
     translation_rc
 
+    chmod +x /usr/local/bin/receive_trans.py
+
     if use_branch; then
         echo "pulling branch"
         tx pull -a -b --mode onlyreviewed
+
+        # update our same branch off master and pr back to master
+        receive_trans.py --base "david.jones/translations" \
+            --head "${CI_COMMIT_REF_NAME}" \
+            --token $(get_secret 'github_token')
     else
         # pulling master
         echo "pulling branch david.jones/translations"
         tx pull -a -b 'david.jones/translations' --mode onlyreviewed
-    fi
 
-    git status
-    # create branch named the same
-    # git checkout -b new-branch existing-branch
-    # commit pulled files
-    # git add ...
-    # git commit -m "translations received"
-    # push to repo
+        # as this is master we need a new branch for pr
+        branchname='translations-20180211'
+        git checkout -b "${branchname}"
+        git add ./content/*
+        git add ./data/*
+        git commit -m "translation work"
+        git push
+        receive_trans.py --base "david.jones/translations" \
+            --head "${CI_COMMIT_REF_NAME}" \
+            --token $(get_secret 'github_token')
+    fi
 }
