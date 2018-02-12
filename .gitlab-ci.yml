@@ -107,7 +107,7 @@ translations:send:
     - /.+?\/[a-zA-Z0-9_-]+/
     - schedules
   except:
-    - translations-20180211
+    - translations-20180212
 
 translations:receive:
   <<: *base_template
@@ -121,7 +121,7 @@ translations:receive:
     - /.+?\/[a-zA-Z0-9_-]+/
     - schedules
   except:
-    - translations-20180211
+    - translations-20180212
 
 # ================== live ================== #
 build_live:

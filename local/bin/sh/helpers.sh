@@ -582,7 +582,7 @@ EOL
         tx pull -a -b 'david.jones/translations' --mode onlyreviewed
 
         # as this is master we need a new branch for pr
-        branchname='translations-20180211'
+        branchname='translations-20180212'
         git checkout -b "${branchname}"
         git add ./content/*
         git commit -m "translation work"
