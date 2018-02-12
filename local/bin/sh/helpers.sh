@@ -565,8 +565,8 @@ translation_receive() {
         tx pull -a -b --mode onlyreviewed
     else
         # pulling master
-        echo "pulling branch david.jones--translations*"
-        tx pull -r "david.jones--translations*" --mode onlyreviewed
+        echo "pulling branch david.jones/translations"
+        tx pull -a -b 'david.jones/translations' --mode onlyreviewed
     fi
 
     git status
