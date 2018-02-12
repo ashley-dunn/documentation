@@ -579,7 +579,6 @@ translation_receive() {
         branchname='translations-20180211'
         git checkout -b "${branchname}"
         git add ./content/*
-        git add ./data/*
         git commit -m "translation work"
         git push
         receive_trans.py --base "david.jones/translations" \
