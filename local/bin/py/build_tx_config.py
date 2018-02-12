@@ -17,12 +17,11 @@ def build_tx_config(options):
         for file_name in options.files.split():
             print(file_name)
             add_to_config(options, config, file_name)
+        with open('.tx/config', 'w') as configfile:
+            config.write(configfile)
     else:
         # use what we have in the config in the repo
         pass
-
-    with open('.tx/config', 'w') as configfile:
-        config.write(configfile)
 
 
 def add_to_config(options, config, file_name):
