@@ -560,18 +560,18 @@ translation_receive() {
     tx --version
     translation_rc
 
-    chmod +x /usr/local/bin/build_tx_config.py
-
     if use_branch; then
         echo "pulling branch"
-        tx pull -a -b
+        tx pull -a -b --mode onlyreviewed
     else
         # pulling master
-        echo "pulling branch ${CI_COMMIT_REF_NAME}*"
-        tx pull -r "${CI_COMMIT_REF_NAME}*"
+        echo "pulling branch david.jones--translations*"
+        tx pull -r "david-jones--translations*" --mode onlyreviewed
     fi
 
+    git status
     # create branch named the same
+    # git checkout -b new-branch existing-branch
     # commit pulled files
     # push to repo
 }
