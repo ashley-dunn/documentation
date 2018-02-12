@@ -566,12 +566,14 @@ translation_receive() {
     else
         # pulling master
         echo "pulling branch david.jones--translations*"
-        tx pull -r "david-jones--translations*" --mode onlyreviewed
+        tx pull -r "david.jones--translations*" --mode onlyreviewed
     fi
 
     git status
     # create branch named the same
     # git checkout -b new-branch existing-branch
     # commit pulled files
+    # git add ...
+    # git commit -m "translations received"
     # push to repo
 }
