@@ -562,6 +562,12 @@ translation_receive() {
 
     chmod +x /usr/local/bin/receive_trans.py
 
+    cat >~/.gitconfig <<EOL
+[user]
+	name = guacbot
+	email = teamguacamole@datadoghq.com
+EOL
+
     if use_branch; then
         echo "pulling branch"
         tx pull -a -b --mode onlyreviewed
